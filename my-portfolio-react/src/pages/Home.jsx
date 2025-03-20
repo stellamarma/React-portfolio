@@ -1,7 +1,7 @@
 import MovieCard from "../components/MovieCard";
 import { useState } from "react";
 function Home(){
-    const [searchQuery,setSearchQuery]=useState();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    const [searchQuery,setSearchQuery]=useState("");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
     const movies=[
         {
             id: 1,
@@ -94,16 +94,21 @@ function Home(){
             url: "https://i.pinimg.com/736x/64/bb/3b/64bb3bb874ecc9e952ca077f91887c3c.jpg"
         }
     ];
-    const handleSearch=()=>{
+    const handleSearch=(e)=>{
+        e.preventDefault()
+        alert(searchQuery);
+        setSearchQuery("-----------")
 
     }
     return <div className="home">
         <form onSubmit={handleSearch} className="search-form" >
-            <input type="text" placeholder="Search for  movies..." className="search-input" />
+            <input type="text" placeholder="Search for  movies..." className="search-input" value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)}/>
             <button type="submit" className="search-button">Search </button>
         </form>
         <div className="movies-grid">
-            {movies.map(movie=><MovieCard movie={movie} key={movie.id}/>)}
+            {movies.map(movie=>(
+               movie.title.toLowerCase().startsWith(searchQuery) && <MovieCard movie={movie} key={movie.id}/>
+            ))}
         </div>
 
     </div>
