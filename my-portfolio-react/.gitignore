@@ -7,7 +7,9 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-services/
+my-portfolio-react/src/services/
+
+
 
 node_modules
 dist
